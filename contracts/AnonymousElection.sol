@@ -107,7 +107,7 @@ contract AnonymousElection {
         //   the sender is a verified voter and they are allowed to vote
         require(canVote[msg.sender],"the sender is a verified voter and they are allowed to vote");
         //   the voter has not already submitted a public key
-        require(voterPK[msg.sender]==bytes(0x00),"the voter has not already submitted a public key");
+        //require(voterPK[msg.sender]==bytes(0x00),"the voter has not already submitted a public key");
 
         // set relevant pk variables
         voterPK[msg.sender] = _pk; // map voter's address to their public key
@@ -158,12 +158,12 @@ contract AnonymousElection {
 
     // TODO: Develop the following getter functions.
     // return prime p
-    function getValueOfPrimeP() public view returns(bytes){
+    function getValueOfPrimeP() public view returns(bytes memory){
         return p;
     }
 
     // return generator g
-    function getValueOfG() public view returns(bytes) {
+    function getValueOfG() public view returns(bytes memory) {
         return g;
     }
 
@@ -205,7 +205,7 @@ contract AnonymousElection {
 
 
     // return the integer value of what round the election is on
-    function getPresentRound() public view{
+    function getPresentRound() public view returns(uint256){ 
         return round;
     }
 
