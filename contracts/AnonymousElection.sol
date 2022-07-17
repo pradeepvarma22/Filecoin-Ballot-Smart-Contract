@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // Anonymous Election Board
 // By: Elijah Jasso
 // Voting algorithm comes from "Anonymous voting by two-round public discussion (2008)" by F. Hao, P.Y.A. Ryan, P. Zieliski
