@@ -40,14 +40,14 @@ contract AnonymousElection {
     constructor(string[] memory _candidates, address[] memory _voters, bytes memory _p, bytes memory _g, address _owner, string memory _name) {
         // check to ensure that this election makes sense, has >0 voters and >1 candidates
         require(_voters.length > 0, "Voters Must be greater than 0");
-        require(_candidates.length>0, "_candidates must be >1");
+        require(_candidates.length>1, "_candidates must be >1");
 
         // TODO: Using the solidity require function, ensure the candidate list and voter list are of non-zero length.
 
         // TODO: instantiate round, owner, candidates, and voters.
         round=1;     // round = 1, when all users are submitting their public keys. From contract start to once all have submitted their pk
 
-        owner = msg.sender;
+        owner = _owner;
 
         for(uint i = 0;i<_candidates.length;i++)
         {
@@ -143,7 +143,7 @@ contract AnonymousElection {
     function vote(bytes memory _voterPublic) public {
         require(canVote[msg.sender],"already voted");
         require(getPresentRound()==2,"round is not equal to 2");
-        canVote[msg.sender] = false;   //removing vote from person
+        canVote[msg.sender] = false;   //removing vote for the person msg.sender
         voterVotes[msg.sender]=_voterPublic;
         allVotes[voterToIndex[msg.sender]]=_voterPublic;
         
