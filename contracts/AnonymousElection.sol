@@ -32,7 +32,7 @@ contract AnonymousElection {
     bytes[] private allPKBytes; // array of all PKs corresponding to voter index. In hex form
     mapping(address => bytes) private voterVotes; // mapping of users to their vote
     bytes[] private allVotes; // array of all votes corresponding to voter index. In hex form
-
+    bytes private empty_check;
 
     uint256 private m; // 2^m > number of candidates, used for tallying votes
 
@@ -107,7 +107,8 @@ contract AnonymousElection {
         //   the sender is a verified voter and they are allowed to vote
         require(canVote[msg.sender],"the sender is a verified voter and they are allowed to vote");
         //   the voter has not already submitted a public key
-        //require(voterPK[msg.sender]==bytes(0x00),"the voter has not already submitted a public key");
+
+        require(!hasSubmittedPK(msg.sender),"the voter has not already submitted a public key");
 
         // set relevant pk variables
         voterPK[msg.sender] = _pk; // map voter's address to their public key
